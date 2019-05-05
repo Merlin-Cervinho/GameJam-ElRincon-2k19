@@ -1,8 +1,8 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
     public GameObject Pig;
     bool moving;
     public int Speed;
@@ -21,10 +21,11 @@ public class PlayerController : MonoBehaviour {
     bool left;
     bool right;
     public float valorJuntos;
-    public int remainingCoins=6;
+    public int remainingCoins = 7;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         moving = false;
         movement = Vector2.zero;
         upPressed = false;
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour {
         collectedCoins = startingCoins;
         valorJuntos = 1; // gameObject.GetComponent<CircleCollider2D>().bounds.size.x;
     }
+
     private void Update()
     {
         if (remainingCoins <= 0)
@@ -45,13 +47,14 @@ public class PlayerController : MonoBehaviour {
             Application.LoadLevel("lose");
         }
     }
-    void FixedUpdate () {
+
+    void FixedUpdate ()
+    {
         display.text = "x " + collectedCoins;
         up = false;
         down = false;
         left = false;
         right = false;
-
 
         if (!moving)
         {
@@ -104,7 +107,6 @@ public class PlayerController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
         if (collision.collider.name != "coin")
         {
             if(rightPressed && (Mathf.Abs(Mathf.Abs(collision.transform.position.x) - Mathf.Abs(transform.position.x)) < valorJuntos))
@@ -123,16 +125,15 @@ public class PlayerController : MonoBehaviour {
             {
                 moving = false;
             }
-
         }
         if(collision.collider.name == "coin")
         {
             collectedCoins += 1;
         }
     }
+
     public void LooseCoins(int damage)
     {
         collectedCoins = collectedCoins - damage;
     }
-
 }
